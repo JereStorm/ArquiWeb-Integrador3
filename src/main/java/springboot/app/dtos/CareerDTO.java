@@ -1,6 +1,8 @@
 package springboot.app.dtos;
 
-public class CareerDTO {
+import java.io.Serializable;
+
+public class CareerDTO implements Serializable {
     private Long idCareer;
 
     private String name;

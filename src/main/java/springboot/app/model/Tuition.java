@@ -1,10 +1,16 @@
 package springboot.app.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.Serializable;
+
+@Getter
+@Setter
 @Entity
-public class Tuition {
+public class Tuition implements Serializable {
 
     @Id
     @Column(name = "id_tuition")
@@ -24,9 +30,9 @@ public class Tuition {
     @Column
     private int inscription;
     @Column
-    private int graduate;
+    private boolean graduate;
 
-    public Tuition(Career career, Student student, int antiquity, int inscription, int graduate) {
+    public Tuition(Career career, Student student, int antiquity, int inscription, boolean graduate) {
         this.career = career;
         this.student = student;
         this.antiquity = antiquity;
@@ -34,9 +40,7 @@ public class Tuition {
         this.graduate = graduate;
     }
 
-    public Tuition() {
-
-    }
+    public Tuition() { }
 
     @Override
     public String toString() {
@@ -57,29 +61,5 @@ public class Tuition {
                 " inscription=" + inscription +
                 " graduate=" + graduate +
                 "\n" + '}' + "\n";
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Career getCareer() {
-        return career;
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public int getAntiquity() {
-        return antiquity;
-    }
-
-    public int getInscription() {
-        return inscription;
-    }
-
-    public int getGraduate() {
-        return graduate;
     }
 }

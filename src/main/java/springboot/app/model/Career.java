@@ -1,13 +1,18 @@
 package springboot.app.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
-public class Career {
+public class Career implements Serializable {
 
     @Id
     @Column(name = "id_career")
@@ -18,7 +23,6 @@ public class Career {
 
     @Column
     private int duration;
-
 
     @OneToMany(fetch = FetchType.EAGER)
     private List<Tuition> tuitions;
@@ -33,37 +37,6 @@ public class Career {
         this.tuitions = new ArrayList<>();
     }
 
-    public Long getIdCareer() {
-        return idCareer;
-    }
-
-    public void setIdCareer(Long idCareer) {
-        this.idCareer = idCareer;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    public List<Tuition> getTuitions() {
-        return tuitions;
-    }
-
-    public void setTuitions(List<Tuition> tuitions) {
-        this.tuitions = tuitions;
-    }
     public void addTuitions(Tuition tuition) {
         this.tuitions.add(tuition);
     }

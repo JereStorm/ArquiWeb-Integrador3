@@ -1,8 +1,9 @@
 package springboot.app.dtos;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class ReportDTO {
+public class ReportDTO implements Serializable {
 
     private String nameCareer;
     private Long enrolled ;
