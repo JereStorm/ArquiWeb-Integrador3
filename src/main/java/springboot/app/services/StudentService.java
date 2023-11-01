@@ -39,8 +39,5 @@ public class StudentService {
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }
-
-
     }
-
 }

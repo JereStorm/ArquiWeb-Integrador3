@@ -1,5 +1,6 @@
 package springboot.app.dtos;
 
+import jdk.jfr.Name;
 import springboot.app.model.Tuition;
 
 import java.io.Serializable;
@@ -34,7 +35,8 @@ public class StudentDTO implements Serializable {
         return DNI;
     }
 
-    public List<String> getCareerName() {
+
+    public List<String> getCareers() {
         return careers;
     }
 
