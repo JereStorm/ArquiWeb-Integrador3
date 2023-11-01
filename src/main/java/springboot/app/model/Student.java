@@ -28,7 +28,7 @@ public class Student implements Serializable {
     @Column
     private int uniNumber;
 
-    @OneToMany
+    @OneToMany(mappedBy = "student")
     private List<Tuition> careers;
 
     public Student() { }

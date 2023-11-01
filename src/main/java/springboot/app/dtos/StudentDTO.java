@@ -1,6 +1,9 @@
 package springboot.app.dtos;
 
+import springboot.app.model.Tuition;
+
 import java.io.Serializable;
+import java.util.List;
 
 public class StudentDTO implements Serializable {
 
@@ -10,13 +13,13 @@ public class StudentDTO implements Serializable {
 
     private Long DNI;
 
-    private String careerName;
+    private List<String> careers;
 
-    public StudentDTO(String name, String city, Long DNI, String careerName) {
+    public StudentDTO(String name, String city, Long DNI, List<String> careers) {
         this.name = name;
         this.city = city;
         this.DNI = DNI;
-        this.careerName = careerName;
+        this.careers = careers;
     }
 
     public String getName() {
@@ -31,8 +34,8 @@ public class StudentDTO implements Serializable {
         return DNI;
     }
 
-    public String getCareerName() {
-        return careerName;
+    public List<String> getCareerName() {
+        return careers;
     }
 
     @Override
@@ -41,7 +44,7 @@ public class StudentDTO implements Serializable {
                 "name='" + name + '\'' +
                 ", city='" + city + '\'' +
                 ", DNI=" + DNI +
-                ", careerName='" + careerName + '\'' +
+                ", careers='" + careers + '\'' +
                 "} \n";
     }
 }

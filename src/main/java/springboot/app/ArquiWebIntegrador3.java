@@ -11,13 +11,14 @@ import java.io.IOException;
 @SpringBootApplication
 public class ArquiWebIntegrador3 {
 
+    @Autowired
     private AddData cargaDeDatos;
     public static void main(String[] args) {
         SpringApplication.run(ArquiWebIntegrador3.class, args);
     }
 
-//    @PostConstruct
-//    public void init() throws IOException {
-//        cargaDeDatos.cargarDatosDesdeCSV();
-//    }
+    /*@PostConstruct
+    public void init() throws IOException {
+        cargaDeDatos.cargarDatosDesdeCSV();
+    }*/
 }

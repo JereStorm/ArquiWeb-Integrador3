@@ -24,7 +24,7 @@ public class Career implements Serializable {
     @Column
     private int duration;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "career")
     private List<Tuition> tuitions;
 
     public Career() {

@@ -31,12 +31,15 @@ public class Tuition implements Serializable {
     private int inscription;
     @Column
     private boolean graduate;
+    @Column
+    private int graduation;
 
-    public Tuition(Career career, Student student, int antiquity, int inscription, boolean graduate) {
+    public Tuition(Career career, Student student, int antiquity, int inscription, boolean graduate, int graduation) {
         this.career = career;
         this.student = student;
         this.antiquity = antiquity;
         this.inscription = inscription;
+        this.graduation = graduation;
         this.graduate = graduate;
     }
 
@@ -53,12 +56,14 @@ public class Tuition implements Serializable {
                     " antiquity=" + antiquity +
                     " inscription=" + inscription +
                     " graduate=" + graduate +
+                    " graduation=" + graduation +
                     "\n" + '}' + "\n";
         }
         return "Tuition{" + "\n" +
                 " id=" + id + "\n" +
                 " antiquity=" + antiquity +
                 " inscription=" + inscription +
+                " graduation=" + graduation +
                 " graduate=" + graduate +
                 "\n" + '}' + "\n";
     }
