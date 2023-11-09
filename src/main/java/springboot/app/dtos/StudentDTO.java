@@ -26,7 +26,7 @@ public class StudentDTO implements Serializable {
 
     private String lastName;
 
-    private int age;
+    private int age, uniNumber;
 
     private String genre;
 
@@ -45,11 +45,12 @@ public class StudentDTO implements Serializable {
         this.genre = genre;
     }
 
-    public StudentDTO(String name, String city, Long DNI, int age, String lastName, String genre) {
+    public StudentDTO(String name, String city, Long DNI, int age, int uniNumber, String lastName, String genre) {
         this.name = name;
         this.city = city;
         this.DNI = DNI;
         this.age = age;
+        this.uniNumber = uniNumber;
         this.lastName = lastName;
         this.genre = genre;
     }
@@ -72,10 +73,14 @@ public class StudentDTO implements Serializable {
     @Override
     public String toString() {
         return "StudentDTO{" +
-                "name='" + name + '\'' +
+                " name='" + name + '\'' +
                 ", city='" + city + '\'' +
                 ", DNI=" + DNI +
-                ", careers='" + careers + '\'' +
-                "} \n";
+                ",careers=" + careers +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", uniNumber=" + uniNumber +
+                ", genre='" + genre + '\'' +
+                '}' + "\n";  // Agregado un salto de línea aquí
     }
 }

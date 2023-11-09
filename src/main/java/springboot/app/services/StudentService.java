@@ -67,11 +67,11 @@ public class StudentService {
                 entity.setGenre(student.getGenre());
                 entity.setLastName(student.getLastName());
                 entity.setAge(student.getAge());
+                entity.setUniNumber(student.getUniNumber());
                 studentRepository.save(entity);
                 System.out.println(entity);
-                return new StudentDTO(entity.getName(), entity.getCity(), entity.getDNI(),entity.getAge(),entity.getLastName(),entity.getGenre());
-
-            }else throw new Exception();
+                return new StudentDTO(entity.getName(), entity.getCity(), entity.getDNI(),entity.getAge(),entity.getUniNumber(),entity.getLastName(),entity.getGenre());
+            }else throw new Exception("Error: Ya existe un usuario con este ID");
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }
