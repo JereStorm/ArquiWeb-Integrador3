@@ -25,6 +25,15 @@ public class StudentController {
         }
     }
 
+    @GetMapping("/{career}/{city}")
+    public ResponseEntity<?> getAllStudentsByCareerAndCity(@PathVariable String career, @PathVariable String city){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(studentService.getAllStudentsByCareerAndCity(career,city));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
     @PostMapping("")
     public ResponseEntity<?> post(@RequestBody StudentDTO student){
         System.out.println(student);

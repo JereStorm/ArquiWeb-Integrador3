@@ -2,9 +2,11 @@ package springboot.app.services;
 
 
 import jakarta.transaction.Transactional;
+import org.aspectj.weaver.NewConstructorTypeMunger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import springboot.app.dtos.StudentDTO;
+import springboot.app.model.Career;
 import springboot.app.model.Student;
 import springboot.app.model.Tuition;
 import springboot.app.repository.CareerRepository;
@@ -124,13 +126,11 @@ public class StudentService {
 
     @Transactional
     public List<StudentDTO> getStudentByGenre(String genre) throws Exception {
-        System.out.println("entro");
         List<Student> students = studentRepository.findAllByGenre(genre);
         boolean exist = studentRepository.existsByGenre(genre);
         System.out.println(exist);
         try {
             if (exist) {
-                System.out.println("entro a if: " + exist);
                 List<StudentDTO> studentDTOS = new ArrayList<>();
 
                 for (Student student : students) {
@@ -161,4 +161,34 @@ public class StudentService {
     }
 
 
+    public List<StudentDTO> getAllStudentsByCareerAndCity(String nameCareer, String city) throws Exception {
+        try {
+            if(careerRepository.existsByName(nameCareer) && studentRepository.existsByCity(city)){
+                List<Student> students = tuitionRepository.findAllByCareerAndCity(nameCareer,city);
+                List<StudentDTO> studentDTOS = new ArrayList<>();
+                for (Student student : students) {
+                    StudentDTO studentDTO = new StudentDTO();
+                    List<String> careers = new ArrayList<>();
+                    studentDTO.setName(student.getName());
+                    studentDTO.setCity(student.getCity());
+                    studentDTO.setDNI(student.getDNI());
+                    studentDTO.setAge(student.getAge());
+                    studentDTO.setLastName(student.getLastName());
+                    studentDTO.setUniNumber(student.getUniNumber());
+                    studentDTO.setGenre(student.getGenre());
+
+                    for (Tuition tuition : student.getCareers()) {
+                        careers.add(tuition.getCareer().getName());
+                    }
+                    studentDTO.setCareers(careers);
+                    studentDTOS.add(studentDTO);
+                }
+                return studentDTOS;
+            }else
+                throw new Exception("Error:La ciudad del estudiante o la carrera que ingreso no existe");
+
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
 }
