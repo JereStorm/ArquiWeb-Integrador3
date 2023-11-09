@@ -44,6 +44,12 @@ public class Student implements Serializable {
         this.careers = new ArrayList<>();
     }
 
+    public void addTuition(Tuition t){
+        if(!careers.contains(t)){
+            careers.add(t);
+        }
+    }
+
     @Override
     public String toString() {
         return "Student{" +

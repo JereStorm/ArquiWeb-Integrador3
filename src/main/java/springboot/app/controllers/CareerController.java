@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springboot.app.services.CareerService;
 
-@RestController("CareerCntroller")
+@RestController("CareerController")
 @RequestMapping("/career")
 public class CareerController {
 
@@ -24,4 +24,9 @@ public class CareerController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
+
+
+
+
+
 }
