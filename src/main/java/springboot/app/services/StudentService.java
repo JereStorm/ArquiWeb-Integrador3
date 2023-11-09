@@ -28,32 +28,31 @@ public class StudentService {
     private TuitionRepository tuitionRepository;
 
 
-
     @Transactional
-    public List<StudentDTO> getAll() throws Exception{
+    public List<StudentDTO> getAll() throws Exception {
         List<StudentDTO> studentsDTO = new ArrayList<>();
-        try{
+        try {
             List<Student> students = studentRepository.findAll();
             //RESOLVER PROBLEMA CON LOS DTO
-            for (Student s: students) {
+            for (Student s : students) {
                 List<String> carrers = new ArrayList<>();
-                for (Tuition c: s.getCareers()) {
+                for (Tuition c : s.getCareers()) {
                     carrers.add(c.getCareer().getName());
                 }
-                studentsDTO.add(new StudentDTO(s.getName(),s.getCity(),s.getDNI(),carrers));
+                studentsDTO.add(new StudentDTO(s.getName(), s.getCity(), s.getDNI(), carrers));
             }
             return studentsDTO;
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
     @Transactional
-    public StudentDTO save(StudentDTO student) throws Exception{
+    public StudentDTO save(StudentDTO student) throws Exception {
         System.out.println(student);
-        try{
+        try {
             System.out.println(!studentRepository.existsByDNI(student.getDNI()));
-            if(!studentRepository.existsByDNI(student.getDNI())){
+            if (!studentRepository.existsByDNI(student.getDNI())) {
                 System.out.println("Entramos al if");
                 Student entity = new Student();
                 entity.setName(student.getName());
@@ -65,40 +64,40 @@ public class StudentService {
                 entity.setUniNumber(student.getUniNumber());
                 studentRepository.save(entity);
                 System.out.println(entity);
-                return new StudentDTO(entity.getName(), entity.getCity(), entity.getDNI(),entity.getAge(),entity.getUniNumber(),entity.getLastName(),entity.getGenre());
-            }else throw new Exception("Error: Ya existe un usuario con este ID");
-        }catch (Exception e){
+                return new StudentDTO(entity.getName(), entity.getCity(), entity.getDNI(), entity.getAge(), entity.getUniNumber(), entity.getLastName(), entity.getGenre());
+            } else throw new Exception("Error: Ya existe un usuario con este ID");
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
     @Transactional
-    public List<StudentDTO> getAllByOrder() throws Exception{
+    public List<StudentDTO> getAllByOrder() throws Exception {
         List<StudentDTO> studentsDTO = new ArrayList<>();
-        try{
+        try {
             List<Student> students = studentRepository.findAllByOrderByName();
             /*List<Student> students = studentRepository.findAll(Sort.by(Sort.Direction.DESC, "name"));*/
 
-            for (Student s: students) {
+            for (Student s : students) {
                 List<String> carrers = new ArrayList<>();
-                for (Tuition c: s.getCareers()) {
+                for (Tuition c : s.getCareers()) {
                     carrers.add(c.getCareer().getName());
                 }
-                studentsDTO.add(new StudentDTO(s.getName(),s.getCity(),s.getDNI(),carrers));
+                studentsDTO.add(new StudentDTO(s.getName(), s.getCity(), s.getDNI(), carrers));
             }
             return studentsDTO;
-        }catch (Exception e){
+        } catch (Exception e) {
 
             throw new Exception(e.getMessage());
         }
     }
 
-
+    @Transactional
     public StudentDTO getStudentByUniNumber(int uniNumber) throws Exception {
         Optional<Student> response = studentRepository.findByUniNumber(uniNumber);
 
-        try{
-            if(response.isPresent()){
+        try {
+            if (response.isPresent()) {
                 Student student = response.get();
                 StudentDTO studentDTO = new StudentDTO();
                 List<String> careers = new ArrayList<>();
@@ -111,26 +110,27 @@ public class StudentService {
                 studentDTO.setGenre(student.getGenre());
 
                 for (Tuition career : student.getCareers()) {
-                   careers.add(career.getCareer().getName());
+                    careers.add(career.getCareer().getName());
                 }
                 studentDTO.setCareers(careers);
                 return studentDTO;
-            }else {
+            } else {
                 throw new Exception("error, no existe estudiante con ese numero de libreta");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
+    @Transactional
     public List<StudentDTO> getStudentByGenre(String genre) throws Exception {
         System.out.println("entro");
         List<Student> students = studentRepository.findAllByGenre(genre);
         boolean exist = studentRepository.existsByGenre(genre);
         System.out.println(exist);
         try {
-            if (exist){
-                System.out.println("entro a if: "+ exist);
+            if (exist) {
+                System.out.println("entro a if: " + exist);
                 List<StudentDTO> studentDTOS = new ArrayList<>();
 
                 for (Student student : students) {
@@ -151,12 +151,14 @@ public class StudentService {
                     studentDTOS.add(studentDTO);
                 }
 
-                return  studentDTOS;
-            }else {
+                return studentDTOS;
+            } else {
                 throw new Exception("error, el genero no existe");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
+
+
 }

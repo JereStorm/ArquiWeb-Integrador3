@@ -6,9 +6,9 @@ public class CareerDTO implements Serializable {
     private Long idCareer;
 
     private String name;
-    private Long cantEnrolled;
+    private int cantEnrolled;
 
-    public CareerDTO(long idCareer, String name, long cantEnrolled) {
+    public CareerDTO(long idCareer, String name, int cantEnrolled) {
         this.idCareer = idCareer;
         this.name = name;
         this.cantEnrolled = cantEnrolled;
@@ -39,11 +39,11 @@ public class CareerDTO implements Serializable {
         this.name = name;
     }
 
-    public Long getCantEnrolled() {
+    public int getCantEnrolled() {
         return cantEnrolled;
     }
 
-    public void setCantEnrolled(Long cantEnrolled) {
+    public void setCantEnrolled(int cantEnrolled) {
         this.cantEnrolled = cantEnrolled;
     }
 
