@@ -42,5 +42,14 @@ public class StudentController {
 
 
 
+    @GetMapping("/order/name")
+    public ResponseEntity<?> getAllByOrder(){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(studentService.getAllByOrder());
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
 
 }

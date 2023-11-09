@@ -1,5 +1,6 @@
 package springboot.app.services;
 
+import jakarta.transaction.Transactional;
 import org.aspectj.weaver.NewConstructorTypeMunger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class TuitionService {
     @Autowired
     private CareerRepository careerRepository;
 
-
+@Transactional
     public TuitionDTO addTuition(TuitionDTO tuitionDTO) throws Exception {
         Optional<Student> studentOptional = studentRepository.findByDNI(tuitionDTO.getDNI());
         Optional<Career> careerOptional = careerRepository.findById(tuitionDTO.getId_career());
