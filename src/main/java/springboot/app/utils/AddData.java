@@ -79,15 +79,13 @@ public class AddData {
                 t.setInscription(Integer.parseInt(csvRecord.get("inscripcion")));
 
                 int aux = Integer.parseInt(csvRecord.get("graduacion"));
-                if(aux != 0){
-                    t.setGraduate(true);
+                t.setGraduation(aux);
+                /*if(aux != 0){
                     t.setGraduation(aux);
                 }else {
-                    t.setGraduate(false);
                     t.setGraduation(0);
-                }
-                t.setGraduate(false);
-                t.setGraduation(aux);
+                }*/
+
 
                 Optional<Career> carrer = careerRepository.findById(Long.parseLong(csvRecord.get("id_carrera")));
                 carrer.ifPresent(t::setCareer);

@@ -30,17 +30,14 @@ public class Tuition implements Serializable {
     @Column
     private int inscription;
     @Column
-    private boolean graduate;
-    @Column
     private int graduation;
 
-    public Tuition(Career career, Student student, int antiquity, int inscription, boolean graduate, int graduation) {
+    public Tuition(Career career, Student student, int antiquity, int inscription, int graduation) {
         this.career = career;
         this.student = student;
         this.antiquity = antiquity;
         this.inscription = inscription;
         this.graduation = graduation;
-        this.graduate = graduate;
     }
 
     public Tuition() { }
@@ -55,7 +52,6 @@ public class Tuition implements Serializable {
                     " student=" + student.getName() +
                     " antiquity=" + antiquity +
                     " inscription=" + inscription +
-                    " graduate=" + graduate +
                     " graduation=" + graduation +
                     "\n" + '}' + "\n";
         }
@@ -64,7 +60,20 @@ public class Tuition implements Serializable {
                 " antiquity=" + antiquity +
                 " inscription=" + inscription +
                 " graduation=" + graduation +
-                " graduate=" + graduate +
                 "\n" + '}' + "\n";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Tuition tuition = (Tuition) o;
+
+        if (!career.equals(tuition.career)) return false;
+        return student.equals(tuition.student);
+    }
+
+
+
 }
