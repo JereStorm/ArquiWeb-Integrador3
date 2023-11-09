@@ -17,8 +17,8 @@ public class ArquiWebIntegrador3 {
         SpringApplication.run(ArquiWebIntegrador3.class, args);
     }
 
-    /*@PostConstruct
+    @PostConstruct
     public void init() throws IOException {
         cargaDeDatos.cargarDatosDesdeCSV();
-    }*/
+    }
 }
