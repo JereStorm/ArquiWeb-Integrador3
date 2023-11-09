@@ -3,21 +3,15 @@ package springboot.app.services;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import springboot.app.dtos.StudentDTO;
-import springboot.app.model.Career;
 import springboot.app.model.Student;
 import springboot.app.model.Tuition;
 import springboot.app.repository.CareerRepository;
 import springboot.app.repository.StudentRepository;
 import springboot.app.repository.TuitionRepository;
 
-import javax.swing.text.html.Option;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,8 +47,6 @@ public class StudentService {
             throw new Exception(e.getMessage());
         }
     }
-
-
 
     @Transactional
     public StudentDTO save(StudentDTO student) throws Exception{
@@ -94,19 +86,77 @@ public class StudentService {
                 }
                 studentsDTO.add(new StudentDTO(s.getName(),s.getCity(),s.getDNI(),carrers));
             }
-
-
             return studentsDTO;
         }catch (Exception e){
 
             throw new Exception(e.getMessage());
         }
-
-
-
-
     }
 
 
+    public StudentDTO getStudentByUniNumber(int uniNumber) throws Exception {
+        Optional<Student> response = studentRepository.findByUniNumber(uniNumber);
 
+        try{
+            if(response.isPresent()){
+                Student student = response.get();
+                StudentDTO studentDTO = new StudentDTO();
+                List<String> careers = new ArrayList<>();
+                studentDTO.setName(student.getName());
+                studentDTO.setCity(student.getCity());
+                studentDTO.setDNI(student.getDNI());
+                studentDTO.setAge(student.getAge());
+                studentDTO.setLastName(student.getLastName());
+                studentDTO.setUniNumber(student.getUniNumber());
+                studentDTO.setGenre(student.getGenre());
+
+                for (Tuition career : student.getCareers()) {
+                   careers.add(career.getCareer().getName());
+                }
+                studentDTO.setCareers(careers);
+                return studentDTO;
+            }else {
+                throw new Exception("error, no existe estudiante con ese numero de libreta");
+            }
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public List<StudentDTO> getStudentByGenre(String genre) throws Exception {
+        System.out.println("entro");
+        List<Student> students = studentRepository.findAllByGenre(genre);
+        boolean exist = studentRepository.existsByGenre(genre);
+        System.out.println(exist);
+        try {
+            if (exist){
+                System.out.println("entro a if: "+ exist);
+                List<StudentDTO> studentDTOS = new ArrayList<>();
+
+                for (Student student : students) {
+                    StudentDTO studentDTO = new StudentDTO();
+                    List<String> careers = new ArrayList<>();
+                    studentDTO.setName(student.getName());
+                    studentDTO.setCity(student.getCity());
+                    studentDTO.setDNI(student.getDNI());
+                    studentDTO.setAge(student.getAge());
+                    studentDTO.setLastName(student.getLastName());
+                    studentDTO.setUniNumber(student.getUniNumber());
+                    studentDTO.setGenre(student.getGenre());
+
+                    for (Tuition career : student.getCareers()) {
+                        careers.add(career.getCareer().getName());
+                    }
+                    studentDTO.setCareers(careers);
+                    studentDTOS.add(studentDTO);
+                }
+
+                return  studentDTOS;
+            }else {
+                throw new Exception("error, el genero no existe");
+            }
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
 }

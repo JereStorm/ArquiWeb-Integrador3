@@ -23,11 +23,7 @@ public class StudentController {
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
-
-
     }
-
-
 
     @PostMapping("")
     public ResponseEntity<?> post(@RequestBody StudentDTO student){
@@ -40,8 +36,6 @@ public class StudentController {
         }
     }
 
-
-
     @GetMapping("/order/name")
     public ResponseEntity<?> getAllByOrder(){
         try{
@@ -51,5 +45,22 @@ public class StudentController {
         }
     }
 
+    @GetMapping("/{uniNumber}")
+    public ResponseEntity<?> getStudentByUniNumber(@PathVariable int uniNumber){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(studentService.getStudentByUniNumber(uniNumber));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/genero/{genre}")
+    public ResponseEntity<?> getStudentByGenre(@PathVariable String genre){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(studentService.getStudentByGenre(genre));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
 
 }

@@ -30,7 +30,6 @@ public class StudentDTO implements Serializable {
 
     private String genre;
 
-
     public StudentDTO() {
     }
 
@@ -61,10 +60,6 @@ public class StudentDTO implements Serializable {
         this.DNI = DNI;
         this.careers = careers;
     }
-
-
-
-
 
     public List<String> getCareers() {
         return careers;

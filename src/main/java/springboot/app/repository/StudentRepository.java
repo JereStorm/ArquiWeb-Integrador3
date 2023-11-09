@@ -20,8 +20,10 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     List<Student> findAllByOrderByName();
 
+    Optional<Student> findByUniNumber(int uniNumber);
 
-
+    List<Student> findAllByGenre(String genre);
+    boolean existsByGenre(String genre);
 
 
     /*public default List<Student> findAllByOrder() {
