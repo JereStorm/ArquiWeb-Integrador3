@@ -35,7 +35,14 @@ public class CareerController {
         }
     }
 
-
+    @GetMapping("/report")
+    public ResponseEntity<?> getReport(){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(careerService.getReport());
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
 
 
 }
